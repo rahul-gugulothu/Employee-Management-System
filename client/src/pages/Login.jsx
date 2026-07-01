@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../services/api";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -30,10 +30,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+      const res = await API.post("/auth/login", formData);
 
       localStorage.setItem("token", res.data.token);
 
@@ -60,9 +57,7 @@ function Login() {
         }}
       >
         <div className="card-body p-5">
-
           <div className="text-center mb-4">
-
             <i
               className="bi bi-person-workspace"
               style={{
@@ -78,13 +73,10 @@ function Login() {
             <p className="text-muted">
               Admin Login
             </p>
-
           </div>
 
           <form onSubmit={handleSubmit}>
-
             <div className="mb-3">
-
               <label className="fw-semibold">
                 Email Address
               </label>
@@ -98,11 +90,9 @@ function Login() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <div className="mb-4">
-
               <label className="fw-semibold">
                 Password
               </label>
@@ -116,7 +106,6 @@ function Login() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <button
@@ -125,29 +114,26 @@ function Login() {
             >
               Login
             </button>
+
             <div className="text-center mt-4">
-  Don't have an account?
+              Don't have an account?
 
-  <Link
-    to="/register"
-    className="text-decoration-none ms-2"
-  >
-    Register
-  </Link>
-</div>
-
+              <Link
+                to="/register"
+                className="text-decoration-none ms-2"
+              >
+                Register
+              </Link>
+            </div>
           </form>
 
           <hr />
 
           <div className="text-center text-muted">
-
             <small>
               Employee Management System
             </small>
-
           </div>
-
         </div>
       </div>
     </div>

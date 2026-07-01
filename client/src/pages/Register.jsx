@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../services/api";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -31,19 +31,17 @@ function Register() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+      const res = await API.post("/auth/register", formData);
 
       toast.success(res.data.message);
 
       setTimeout(() => {
         navigate("/");
       }, 1200);
-
     } catch (error) {
-      toast.error(error.response?.data?.message || "Registration Failed");
+      toast.error(
+        error.response?.data?.message || "Registration Failed"
+      );
     }
   };
 
@@ -62,9 +60,7 @@ function Register() {
         }}
       >
         <div className="card-body p-5">
-
           <div className="text-center mb-4">
-
             <i
               className="bi bi-person-plus-fill"
               style={{
@@ -80,13 +76,10 @@ function Register() {
             <p className="text-muted">
               Register as Administrator
             </p>
-
           </div>
 
           <form onSubmit={handleSubmit}>
-
             <div className="mb-3">
-
               <label className="fw-semibold">
                 Full Name
               </label>
@@ -100,11 +93,9 @@ function Register() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <div className="mb-3">
-
               <label className="fw-semibold">
                 Email
               </label>
@@ -118,11 +109,9 @@ function Register() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <div className="mb-4">
-
               <label className="fw-semibold">
                 Password
               </label>
@@ -136,7 +125,6 @@ function Register() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <button
@@ -145,11 +133,9 @@ function Register() {
             >
               Register
             </button>
-
           </form>
 
           <div className="text-center mt-4">
-
             Already have an account?
 
             <Link
@@ -158,9 +144,7 @@ function Register() {
             >
               Login
             </Link>
-
           </div>
-
         </div>
       </div>
     </div>
