@@ -25,7 +25,6 @@ const getEmployees = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      count: employees.length,
       employees,
     });
   } catch (error) {
@@ -36,7 +35,7 @@ const getEmployees = async (req, res) => {
   }
 };
 
-// Get Single Employee
+// Get Employee By ID
 const getEmployeeById = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.id);
