@@ -1,6 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+    if (!confirmLogout) return;
+
+    localStorage.removeItem("token");
+
+    alert("Logged out successfully!");
+
+    navigate("/");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
       <div className="container-fluid">
@@ -15,7 +32,10 @@ function Navbar() {
             Welcome, Admin
           </span>
 
-          <button className="btn btn-light btn-sm">
+          <button
+            className="btn btn-light btn-sm"
+            onClick={handleLogout}
+          >
             Logout
           </button>
 
