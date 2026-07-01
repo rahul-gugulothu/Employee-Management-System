@@ -23,6 +23,7 @@ A full-stack Employee Management System built using the MERN Stack (MongoDB, Exp
 ### Employee Management
 - Add Employee
 - View Employees
+- Search Employees
 - Edit Employee
 - Delete Employee
 
