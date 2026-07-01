@@ -1,0 +1,112 @@
+/* General */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Navbar */
+
+.navbar {
+  z-index: 1050;
+}
+
+/* Sidebar */
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Cards */
+
+.card {
+  border-radius: 12px;
+}
+
+/* Tables */
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* Buttons */
+
+.btn {
+  border-radius: 8px;
+}
+
+/* Inputs */
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+}
+
+/* Responsive */
+
+@media (max-width: 992px) {
+
+  .sidebar {
+    width: 220px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .d-flex {
+    flex-direction: column !important;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .container,
+  .container-fluid {
+    padding: 15px !important;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .card {
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem !important;
+  }
+
+  .display-4 {
+    font-size: 2.2rem !important;
+  }
+
+}

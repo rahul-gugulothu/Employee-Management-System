@@ -2,10 +2,13 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Employees from "./pages/Employees";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddEmployee from "./pages/AddEmployee";
 import EditEmployee from "./pages/EditEmployee";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -14,7 +17,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Login />} />
-
+        <Route path="*" element={<NotFound />} />
         <Route
   path="/dashboard"
   element={
@@ -32,7 +35,7 @@ function App() {
     </ProtectedRoute>
   }
 />
-
+<Route path="/register" element={<Register />} />
 <Route
   path="/add-employee"
   element={
@@ -52,6 +55,16 @@ function App() {
 />
 
       </Routes>
+    <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
 
     </BrowserRouter>
   );

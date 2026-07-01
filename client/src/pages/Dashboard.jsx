@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import API from "../services/api";
+import Loader from "../components/Loader";
 
 function Dashboard() {
   const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchEmployees();
   }, []);
-
-  const fetchEmployees = async () => {
-    try {
-      const res = await API.get("/employees");
-      setEmployees(res.data.employees);
-    } catch (error) {
-      console.log("Error fetching employees:", error);
-    }
-  };
+const fetchEmployees = async () => {
+  try {
+    const res = await API.get("/employees");
+    setEmployees(res.data.employees);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Dashboard Statistics
   const totalEmployees = employees.length;
@@ -38,6 +41,9 @@ function Dashboard() {
     (sum, emp) => sum + Number(emp.salary),
     0
   );
+  if (loading) {
+  return <Loader />;
+}
 
   return (
     <>

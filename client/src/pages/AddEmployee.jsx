@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddEmployee() {
   const navigate = useNavigate();
@@ -32,11 +33,11 @@ function AddEmployee() {
     try {
       await API.post("/employees", employee);
 
-      alert("Employee Added Successfully!");
+      toast.success("Employee Added Successfully!");
 
       navigate("/employees");
     } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -45,42 +46,66 @@ function AddEmployee() {
       <Navbar />
 
       <div className="d-flex">
-
         <Sidebar />
 
-        <div className="container p-4">
+        <div className="container-fluid p-4">
 
-          <div className="card shadow">
+          {/* Page Header */}
 
-            <div className="card-header bg-primary text-white">
-              <h3>Add Employee</h3>
+          <div className="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+              <h2 className="fw-bold">
+                Add Employee
+              </h2>
+
+              <p className="text-muted mb-0">
+                Fill in the employee details below.
+              </p>
             </div>
 
-            <div className="card-body">
+            <i
+              className="bi bi-person-plus-fill text-primary"
+              style={{ fontSize: "55px" }}
+            ></i>
+
+          </div>
+
+          {/* Form */}
+
+          <div className="card shadow border-0">
+
+            <div className="card-body p-4">
 
               <form onSubmit={handleSubmit}>
 
                 <div className="row">
 
-                  <div className="col-md-6 mb-3">
-                    <label>Employee ID</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Employee ID
+                    </label>
 
                     <input
                       type="text"
                       className="form-control"
                       name="employeeId"
+                      placeholder="EMP001"
                       value={employee.employeeId}
                       onChange={handleChange}
                       required
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Name</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Full Name
+                    </label>
 
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="John Doe"
                       name="name"
                       value={employee.name}
                       onChange={handleChange}
@@ -88,12 +113,15 @@ function AddEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Email</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Email
+                    </label>
 
                     <input
                       type="email"
                       className="form-control"
+                      placeholder="john@example.com"
                       name="email"
                       value={employee.email}
                       onChange={handleChange}
@@ -101,12 +129,15 @@ function AddEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Phone</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Phone Number
+                    </label>
 
                     <input
                       type="number"
                       className="form-control"
+                      placeholder="9876543210"
                       name="phone"
                       value={employee.phone}
                       onChange={handleChange}
@@ -114,12 +145,15 @@ function AddEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Department</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Department
+                    </label>
 
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="IT"
                       name="department"
                       value={employee.department}
                       onChange={handleChange}
@@ -127,12 +161,15 @@ function AddEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Designation</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Designation
+                    </label>
 
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Software Engineer"
                       name="designation"
                       value={employee.designation}
                       onChange={handleChange}
@@ -140,12 +177,15 @@ function AddEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Salary</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Salary
+                    </label>
 
                     <input
                       type="number"
                       className="form-control"
+                      placeholder="50000"
                       name="salary"
                       value={employee.salary}
                       onChange={handleChange}
@@ -153,8 +193,10 @@ function AddEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Joining Date</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Joining Date
+                    </label>
 
                     <input
                       type="date"
@@ -166,11 +208,35 @@ function AddEmployee() {
                     />
                   </div>
 
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Status
+                    </label>
+
+                    <select
+                      className="form-select"
+                      name="status"
+                      value={employee.status}
+                      onChange={handleChange}
+                    >
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
+                  </div>
+
                 </div>
 
-                <button className="btn btn-success">
-                  Add Employee
-                </button>
+                <div className="text-end">
+
+                  <button
+                    type="submit"
+                    className="btn btn-success btn-lg"
+                  >
+                    <i className="bi bi-check-circle-fill me-2"></i>
+                    Add Employee
+                  </button>
+
+                </div>
 
               </form>
 

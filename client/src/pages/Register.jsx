@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +15,7 @@ function Login() {
   }, [navigate]);
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -31,17 +32,18 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5000/api/auth/register",
         formData
       );
 
-      localStorage.setItem("token", res.data.token);
+      toast.success(res.data.message);
 
-      toast.success("Login Successful!");
+      setTimeout(() => {
+        navigate("/");
+      }, 1200);
 
-      navigate("/dashboard");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login Failed");
+      toast.error(error.response?.data?.message || "Registration Failed");
     }
   };
 
@@ -55,7 +57,7 @@ function Login() {
       <div
         className="card shadow-lg border-0"
         style={{
-          width: "420px",
+          width: "430px",
           borderRadius: "20px",
         }}
       >
@@ -64,7 +66,7 @@ function Login() {
           <div className="text-center mb-4">
 
             <i
-              className="bi bi-person-workspace"
+              className="bi bi-person-plus-fill"
               style={{
                 fontSize: "55px",
                 color: "#0d6efd",
@@ -72,11 +74,11 @@ function Login() {
             ></i>
 
             <h2 className="fw-bold mt-3">
-              Employee Management
+              Create Account
             </h2>
 
             <p className="text-muted">
-              Admin Login
+              Register as Administrator
             </p>
 
           </div>
@@ -86,7 +88,25 @@ function Login() {
             <div className="mb-3">
 
               <label className="fw-semibold">
-                Email Address
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Enter Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+
+            </div>
+
+            <div className="mb-3">
+
+              <label className="fw-semibold">
+                Email
               </label>
 
               <input
@@ -120,31 +140,24 @@ function Login() {
             </div>
 
             <button
-              className="btn btn-primary btn-lg w-100"
+              className="btn btn-success btn-lg w-100"
               type="submit"
             >
-              Login
+              Register
             </button>
-            <div className="text-center mt-4">
-  Don't have an account?
-
-  <Link
-    to="/register"
-    className="text-decoration-none ms-2"
-  >
-    Register
-  </Link>
-</div>
 
           </form>
 
-          <hr />
+          <div className="text-center mt-4">
 
-          <div className="text-center text-muted">
+            Already have an account?
 
-            <small>
-              Employee Management System
-            </small>
+            <Link
+              to="/"
+              className="text-decoration-none ms-2"
+            >
+              Login
+            </Link>
 
           </div>
 
@@ -154,4 +167,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

@@ -1,38 +1,82 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 function Sidebar() {
+  const location = useLocation();
+
+  const menuItems = [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: "bi-speedometer2",
+    },
+    {
+      name: "Employees",
+      path: "/employees",
+      icon: "bi-people-fill",
+    },
+    {
+      name: "Add Employee",
+      path: "/add-employee",
+      icon: "bi-person-plus-fill",
+    },
+  ];
+
   return (
     <div
-      className="bg-dark text-white p-3"
+      className="bg-dark text-white shadow"
       style={{
+        width: "260px",
         minHeight: "100vh",
-        width: "250px"
       }}
     >
-      <h3 className="mb-4">EMS</h3>
+      {/* Logo */}
 
-      <ul className="nav flex-column">
+      <div className="text-center py-4 border-bottom border-secondary">
+        <i
+          className="bi bi-building-fill-gear"
+          style={{
+            fontSize: "3rem",
+            color: "#0d6efd",
+          }}
+        ></i>
 
-        <li className="nav-item mb-3">
-          <Link to="/dashboard" className="nav-link text-white">
-            🏠 Dashboard
+        <h4 className="mt-2 fw-bold">
+          EMS
+        </h4>
+
+        <small className="text-secondary">
+          Admin Panel
+        </small>
+      </div>
+
+      {/* Navigation */}
+
+      <div className="mt-4">
+
+        {menuItems.map((item) => (
+
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`d-flex align-items-center text-decoration-none px-4 py-3 ${
+              location.pathname === item.path
+                ? "bg-primary text-white"
+                : "text-light"
+            }`}
+            style={{
+              transition: "0.3s",
+            }}
+          >
+            <i className={`bi ${item.icon} me-3`}></i>
+
+            <span>{item.name}</span>
+
           </Link>
-        </li>
 
-        <li className="nav-item mb-3">
-          <Link to="/employees" className="nav-link text-white">
-            👨 Employees
-          </Link>
-        </li>
+        ))}
 
-        <li className="nav-item mb-3">
-          <Link to="/add-employee" className="nav-link text-white">
-            ➕ Add Employee
-          </Link>
-        </li>
-
-      </ul>
-
+      </div>
     </div>
   );
 }

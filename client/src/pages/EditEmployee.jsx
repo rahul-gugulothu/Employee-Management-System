@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import API from "../services/api";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function EditEmployee() {
   const navigate = useNavigate();
@@ -52,12 +53,11 @@ function EditEmployee() {
     try {
       await API.put(`/employees/${id}`, employee);
 
-      alert("Employee Updated Successfully!");
+      toast.success("Employee Updated Successfully!");
 
       navigate("/employees");
     } catch (error) {
-      console.log(error);
-      alert(error.response?.data?.message || "Update Failed");
+      toast.error(error.response?.data?.message || "Update Failed");
     }
   };
 
@@ -68,21 +68,41 @@ function EditEmployee() {
       <div className="d-flex">
         <Sidebar />
 
-        <div className="container p-4">
-          <div className="card shadow">
+        <div className="container-fluid p-4">
 
-            <div className="card-header bg-warning text-dark">
-              <h3>Edit Employee</h3>
+          {/* Header */}
+
+          <div className="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+              <h2 className="fw-bold">Edit Employee</h2>
+              <p className="text-muted mb-0">
+                Update employee information.
+              </p>
             </div>
 
-            <div className="card-body">
+            <i
+              className="bi bi-pencil-square text-warning"
+              style={{ fontSize: "55px" }}
+            ></i>
+
+          </div>
+
+          {/* Form */}
+
+          <div className="card shadow border-0">
+
+            <div className="card-body p-4">
 
               <form onSubmit={handleSubmit}>
 
                 <div className="row">
 
-                  <div className="col-md-6 mb-3">
-                    <label>Employee ID</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Employee ID
+                    </label>
+
                     <input
                       type="text"
                       className="form-control"
@@ -93,8 +113,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Name</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Full Name
+                    </label>
+
                     <input
                       type="text"
                       className="form-control"
@@ -105,8 +128,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Email</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Email
+                    </label>
+
                     <input
                       type="email"
                       className="form-control"
@@ -117,8 +143,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Phone</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Phone Number
+                    </label>
+
                     <input
                       type="number"
                       className="form-control"
@@ -129,8 +158,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Department</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Department
+                    </label>
+
                     <input
                       type="text"
                       className="form-control"
@@ -141,8 +173,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Designation</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Designation
+                    </label>
+
                     <input
                       type="text"
                       className="form-control"
@@ -153,8 +188,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Salary</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Salary
+                    </label>
+
                     <input
                       type="number"
                       className="form-control"
@@ -165,8 +203,11 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Joining Date</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Joining Date
+                    </label>
+
                     <input
                       type="date"
                       className="form-control"
@@ -177,8 +218,10 @@ function EditEmployee() {
                     />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <label>Status</label>
+                  <div className="col-md-6 mb-4">
+                    <label className="fw-semibold">
+                      Status
+                    </label>
 
                     <select
                       className="form-select"
@@ -193,15 +236,24 @@ function EditEmployee() {
 
                 </div>
 
-                <button type="submit" className="btn btn-warning">
-                  Update Employee
-                </button>
+                <div className="text-end">
+
+                  <button
+                    type="submit"
+                    className="btn btn-warning btn-lg"
+                  >
+                    <i className="bi bi-check-circle-fill me-2"></i>
+                    Update Employee
+                  </button>
+
+                </div>
 
               </form>
 
             </div>
 
           </div>
+
         </div>
       </div>
     </>
