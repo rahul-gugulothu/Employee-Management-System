@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const tempUserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -21,22 +21,14 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    role: {
+    otp: {
       type: String,
-      enum: ["admin", "user"],
-      default: "admin",
+      required: true,
     },
 
-    // Password Reset OTP
-
-    resetOTP: {
-      type: String,
-      default: null,
-    },
-
-    resetOTPExpires: {
+    otpExpires: {
       type: Date,
-      default: null,
+      required: true,
     },
   },
   {
@@ -44,4 +36,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("TempUser", tempUserSchema);

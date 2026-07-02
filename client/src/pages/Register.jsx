@@ -28,22 +28,28 @@ function Register() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await API.post("/auth/register", formData);
+  try {
 
-      toast.success(res.data.message);
+    const res = await API.post("/auth/register", formData);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1200);
-    } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Registration Failed"
-      );
-    }
-  };
+    toast.success(res.data.message);
+
+    navigate("/verify-otp", {
+      state: {
+        email: formData.email,
+      },
+    });
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data?.message || "Registration Failed"
+    );
+
+  }
+};
 
   return (
     <div

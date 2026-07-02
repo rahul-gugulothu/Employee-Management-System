@@ -9,6 +9,7 @@ import EditEmployee from "./pages/EditEmployee";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import NotFound from "./pages/NotFound";
+import VerifyOTP from "./pages/VerifyOTP";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route
   path="/dashboard"
   element={

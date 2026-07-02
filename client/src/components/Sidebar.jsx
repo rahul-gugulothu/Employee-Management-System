@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
 
   const menuItems = [
@@ -22,6 +22,12 @@ function Sidebar() {
     },
   ];
 
+  const handleClick = () => {
+    if (window.innerWidth < 992) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
     <div
       className="bg-dark text-white shadow"
@@ -33,6 +39,7 @@ function Sidebar() {
       {/* Logo */}
 
       <div className="text-center py-4 border-bottom border-secondary">
+
         <i
           className="bi bi-building-fill-gear"
           style={{
@@ -48,6 +55,7 @@ function Sidebar() {
         <small className="text-secondary">
           Admin Panel
         </small>
+
       </div>
 
       {/* Navigation */}
@@ -59,6 +67,7 @@ function Sidebar() {
           <Link
             key={item.path}
             to={item.path}
+            onClick={handleClick}
             className={`d-flex align-items-center text-decoration-none px-4 py-3 ${
               location.pathname === item.path
                 ? "bg-primary text-white"
@@ -68,7 +77,12 @@ function Sidebar() {
               transition: "0.3s",
             }}
           >
-            <i className={`bi ${item.icon} me-3`}></i>
+            <i
+              className={`bi ${item.icon} me-3`}
+              style={{
+                fontSize: "1.1rem",
+              }}
+            ></i>
 
             <span>{item.name}</span>
 
@@ -77,6 +91,7 @@ function Sidebar() {
         ))}
 
       </div>
+
     </div>
   );
 }

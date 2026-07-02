@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -37,217 +36,236 @@ function AddEmployee() {
 
       navigate("/employees");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(
+        error.response?.data?.message || "Something went wrong"
+      );
     }
   };
 
   return (
-    <>
-      <Navbar />
+    <Layout>
 
-      <div className="d-flex">
-        <Sidebar />
+      <div className="container-fluid p-3 p-md-4">
 
-        <div className="container-fluid p-4">
+        {/* Header */}
 
-          {/* Page Header */}
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
 
-          <div className="d-flex justify-content-between align-items-center mb-4">
+          <div>
 
-            <div>
-              <h2 className="fw-bold">
-                Add Employee
-              </h2>
+            <h2 className="fw-bold">
+              Add Employee
+            </h2>
 
-              <p className="text-muted mb-0">
-                Fill in the employee details below.
-              </p>
-            </div>
-
-            <i
-              className="bi bi-person-plus-fill text-primary"
-              style={{ fontSize: "55px" }}
-            ></i>
+            <p className="text-muted mb-0">
+              Fill in the employee details below.
+            </p>
 
           </div>
 
-          {/* Form */}
+          <i
+            className="bi bi-person-plus-fill text-primary d-none d-md-block"
+            style={{
+              fontSize: "55px",
+            }}
+          ></i>
 
-          <div className="card shadow border-0">
+        </div>
 
-            <div className="card-body p-4">
+        {/* Form */}
 
-              <form onSubmit={handleSubmit}>
+        <div className="card shadow border-0">
 
-                <div className="row">
+          <div className="card-body p-3 p-md-4">
 
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Employee ID
-                    </label>
+            <form onSubmit={handleSubmit}>
 
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="employeeId"
-                      placeholder="EMP001"
-                      value={employee.employeeId}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+              <div className="row">
 
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Full Name
-                    </label>
+                <div className="col-12 col-md-6 mb-3">
 
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="John Doe"
-                      name="name"
-                      value={employee.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+                  <label className="fw-semibold">
+                    Employee ID
+                  </label>
 
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Email
-                    </label>
-
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="john@example.com"
-                      name="email"
-                      value={employee.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Phone Number
-                    </label>
-
-                    <input
-                      type="number"
-                      className="form-control"
-                      placeholder="9876543210"
-                      name="phone"
-                      value={employee.phone}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Department
-                    </label>
-
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="IT"
-                      name="department"
-                      value={employee.department}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Designation
-                    </label>
-
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Software Engineer"
-                      name="designation"
-                      value={employee.designation}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Salary
-                    </label>
-
-                    <input
-                      type="number"
-                      className="form-control"
-                      placeholder="50000"
-                      name="salary"
-                      value={employee.salary}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Joining Date
-                    </label>
-
-                    <input
-                      type="date"
-                      className="form-control"
-                      name="joiningDate"
-                      value={employee.joiningDate}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label className="fw-semibold">
-                      Status
-                    </label>
-
-                    <select
-                      className="form-select"
-                      name="status"
-                      value={employee.status}
-                      onChange={handleChange}
-                    >
-                      <option value="active">Active</option>
-                      <option value="inactive">Inactive</option>
-                    </select>
-                  </div>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="EMP001"
+                    name="employeeId"
+                    value={employee.employeeId}
+                    onChange={handleChange}
+                    required
+                  />
 
                 </div>
 
-                <div className="text-end">
+                <div className="col-12 col-md-6 mb-3">
 
-                  <button
-                    type="submit"
-                    className="btn btn-success btn-lg"
+                  <label className="fw-semibold">
+                    Full Name
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="John Doe"
+                    name="name"
+                    value={employee.name}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-3">
+
+                  <label className="fw-semibold">
+                    Email
+                  </label>
+
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="john@example.com"
+                    name="email"
+                    value={employee.email}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-3">
+
+                  <label className="fw-semibold">
+                    Phone Number
+                  </label>
+
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="9876543210"
+                    name="phone"
+                    value={employee.phone}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-3">
+
+                  <label className="fw-semibold">
+                    Department
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="IT"
+                    name="department"
+                    value={employee.department}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-3">
+
+                  <label className="fw-semibold">
+                    Designation
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Software Engineer"
+                    name="designation"
+                    value={employee.designation}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-3">
+
+                  <label className="fw-semibold">
+                    Salary
+                  </label>
+
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="50000"
+                    name="salary"
+                    value={employee.salary}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-3">
+
+                  <label className="fw-semibold">
+                    Joining Date
+                  </label>
+
+                  <input
+                    type="date"
+                    className="form-control"
+                    name="joiningDate"
+                    value={employee.joiningDate}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+                <div className="col-12 col-md-6 mb-4">
+
+                  <label className="fw-semibold">
+                    Status
+                  </label>
+
+                  <select
+                    className="form-select"
+                    name="status"
+                    value={employee.status}
+                    onChange={handleChange}
                   >
-                    <i className="bi bi-check-circle-fill me-2"></i>
-                    Add Employee
-                  </button>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
 
                 </div>
 
-              </form>
+              </div>
 
-            </div>
+              <div className="d-grid d-md-flex justify-content-md-end">
+
+                <button
+                  className="btn btn-success btn-lg"
+                  type="submit"
+                >
+                  <i className="bi bi-check-circle-fill me-2"></i>
+                  Add Employee
+                </button>
+
+              </div>
+
+            </form>
 
           </div>
 
         </div>
 
       </div>
-    </>
+
+    </Layout>
   );
 }
 
